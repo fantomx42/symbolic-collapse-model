@@ -74,6 +74,10 @@ This system helps visualize symbolic strain from information overload, abstracti
 
 **Run the simulation** in [Colab](https://colab.research.google.com/github/fantomx42/symbolic-collapse-model/blob/main/symbolic_collapse_simulator.ipynb) or [Binder](https://mybinder.org/v2/gh/fantomx42/symbolic-collapse-model/main?filepath=symbolic_collapse_simulator.ipynb) to test how different variables affect collapse.
 
+### Live Demo  
+Explore the interactive infographic:  
+[Symbolic Collapse Pressure Visual Model](https://fantomx42.github.io/symbolic-collapse-model/)
+
 ## License
 
 This work is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**.
