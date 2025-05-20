@@ -110,5 +110,13 @@ R_{	ext{total}} = R_{	ext{task}} - \lambda \cdot \mathcal{C}
 
 ---
 
-© 2025 Tristan Wheeler. MIT License.  
-Contributions welcome at: [https://github.com/fantomx42/symbolic-collapse-model](https://github.com/fantomx42/symbolic-collapse-model)
+© 2025 Tristan Wheeler. ---
+
+**This work is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).**
+
+You are free to:
+- **Share** — copy and redistribute the material in any medium or format  
+- **Adapt** — remix, transform, and build upon the material  
+- **Non-commercial only** — not for commercial use  
+- **Attribution required** — you must give appropriate credit  
+- **Share alike** — any derivative work must carry the same license(https://github.com/fantomx42/symbolic-collapse-model)
