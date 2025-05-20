@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symbolic Collapse Pressure: An Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0"></script> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .formula {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.5em;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .formula .numerator {
+            border-bottom: 2px solid currentColor;
+            padding-bottom: 0.25em;
+        }
+        .formula .denominator {
+            padding-top: 0.25em;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+        .text-primary-accent { color: #0A74DA; }
+        .bg-primary-accent { background-color: #0A74DA; }
+        .text-secondary-accent { color: #FF7F00; }
+        .bg-secondary-accent { background-color: #FF7F00; }
+        .border-primary-accent { border-color: #0A74DA; }
+
+        .flowchart-item {
+            border: 2px solid #0A74DA;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            background-color: #F0F8FF;
+            min-width: 120px;
+        }
+        .flowchart-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #0A74DA;
+            margin: 0 0.5rem;
+        }
+        
+        .gemini-button {
+            background-color: #FF7F00; /* Secondary Orange */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .gemini-button:hover {
+            background-color: #cc6600; /* Darker Orange */
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border-left-color: #0A74DA; /* Primary Blue */
+            animation: spin 1s ease infinite;
+            display: inline-block;
+            margin-left: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .gemini-response-area {
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #e9f5ff; /* Light blue background */
+            border-left: 4px solid #0A74DA; /* Primary blue border */
+            border-radius: 0.25rem;
+            white-space: pre-wrap; /* Preserve formatting */
+        }
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto; /* 10% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 600px;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /*
+            Chosen Color Palette Name: "Oceanic Professional"
+            Primary Blue: #0A74DA
+            Secondary Orange: #FF7F00
+            Accent Teal: #00A99D
+            Dark Text: #212529
+            Light Background: #F8F9FA
+            Card Background: #FFFFFF
+        */
+
+        /*
+            Narrative Plan & Structure: (No changes from previous version)
+        */
+
+        /*
+            Visualization Choices & Justification (Confirming NO SVG/Mermaid JS): (No changes from previous version)
+            Overall Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All visuals are Chart.js (Canvas) or HTML/CSS.
+        */
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-primary-accent text-white p-6 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold text-center">Symbolic Collapse Pressure: A Diagnostic Framework</h1>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="introduction" class="my-12">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-semibold mb-6 text-center text-primary-accent">Understanding Symbolic Collapse</h2>
+                <p class="text-lg mb-4 text-center">Collapse is not merely material. It is symbolic. Long before cities fall or systems break, the shared meaning that binds them erodes. This infographic explores a formal method to detect and quantify <strong class="text-secondary-accent">symbolic collapse pressure (𝒞)</strong>—the tension that builds when information outpaces understanding, abstraction detaches from reality, and coherence fragments.</p>
+                
+                <div class="my-8">
+                    <h3 class="text-2xl font-semibold text-center mb-4 text-primary-accent">The Core Formula</h3>
+                    <div class="formula text-gray-700 bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <span>𝒞</span> = 
+                        <div class="inline-block align-middle">
+                            <div class="numerator">I ⋅ S ⋅ P</div>
+                            <div class="denominator">T ⋅ E</div>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-center text-gray-600">When the numerator (forces of overload, detachment, division) outpaces the denominator (forces of symbolic resilience), symbolic collapse pressure rises.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="components" class="my-12">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-semibold mb-8 text-center text-primary-accent">The Five Pillars of Symbolic Dynamics</h2>
+                <p class="text-lg mb-6 text-center text-gray-700">Symbolic collapse pressure (𝒞) is a nonlinear function of five critical dynamics. Understanding each is key to diagnosing systemic vulnerabilities.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-red-50 p-6 rounded-lg shadow-md border-l-4 border-red-500">
+                        <h3 class="text-xl font-semibold text-red-700 mb-2">I: Information Load</h3>
+                        <p class="text-gray-700">The sheer volume of data present or processed by a system. High load can lead to <strong class="text-red-600">input pressure</strong>.</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg shadow-md border-l-4 border-red-500">
+                        <h3 class="text-xl font-semibold text-red-700 mb-2">S: Symbolic Abstraction</h3>
+                        <p class="text-gray-700">The degree of conceptual or metaphorical indirection. Excessive abstraction can cause <strong class="text-red-600">interpretive drift</strong>.</p>
+                    </div>
+                    <div class="bg-red-50 p-6 rounded-lg shadow-md border-l-4 border-red-500">
+                        <h3 class="text-xl font-semibold text-red-700 mb-2">P: Polarization</h3>
+                        <p class="text-gray-700">The extent of value fragmentation or frame divergence. High polarization signifies <strong class="text-red-600">sociocognitive fracture</strong>.</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg shadow-md border-l-4 border-green-500 md:col-span-1 lg:col-span-1">
+                        <h3 class="text-xl font-semibold text-green-700 mb-2">T: Transmission Fidelity</h3>
+                        <p class="text-gray-700">How clearly and accurately ideas are transmitted. Low fidelity increases the <strong class="text-green-600">noise floor</strong>.</p>
+                    </div>
+                    <div class="bg-green-50 p-6 rounded-lg shadow-md border-l-4 border-green-500 md:col-span-1 lg:col-span-2">
+                        <h3 class="text-xl font-semibold text-green-700 mb-2">E: Epistemic Coherence</h3>
+                        <p class="text-gray-700">The internal consistency and logical integration of knowledge. Strong coherence maintains <strong class="text-green-600">shared frame integrity</strong>.</p>
+                    </div>
+                </div>
+                <p class="mt-8 text-lg text-center text-gray-700">Collapse emerges not from any single failure, but from the <strong class="text-secondary-accent">compounding of overload, detachment, and division</strong> against the system’s symbolic resilience (fidelity and coherence).</p>
+            </div>
+        </section>
+
+        <section id="simulations" class="my-12">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-semibold mb-8 text-center text-primary-accent">Epochal Shifts: The Rising Tide of 𝒞</h2>
+                <p class="text-lg mb-6 text-center text-gray-700">The formula was simulated across five historical communication epochs using normalized metrics. The results reveal a dramatic increase in symbolic collapse pressure over time, particularly in recent eras.</p>
+                <div class="chart-container my-8">
+                    <canvas id="epochalSimulationsChart"></canvas>
+                </div>
+                <p class="text-md text-center text-gray-600 mb-4">This chart displays the calculated Symbolic Collapse Pressure (𝒞) for each epoch. As information load and abstraction rise, and transmission fidelity and epistemic coherence struggle to keep pace, 𝒞 values escalate.</p>
+                <div class="text-center mt-8 p-6 bg-yellow-50 border-l-4 border-yellow-400 rounded-md shadow">
+                    <h3 class="text-2xl font-semibold text-yellow-700 mb-2">The Collapse Threshold (Ψ)</h3>
+                    <p class="text-lg text-gray-700">A symbolic system is considered unstable when <strong class="text-yellow-600">𝒞 ≥ Ψ</strong>. A general benchmark for Ψ is approximately <strong class="text-yellow-600">1.0</strong>.</p>
+                    <p class="text-lg text-gray-700 mt-2">The simulations indicate that the <strong class="text-red-600">Digital and AI-driven eras have breached this critical threshold</strong>, signaling systems under significant epistemic strain.</p>
+                </div>
+                <div id="mitigationInsightsContainer" class="mt-6 space-y-4">
+                    </div>
+            </div>
+        </section>
+
+        <section id="interactiveAnalyzer" class="my-12">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-semibold mb-6 text-center text-primary-accent">✨ Interactive SCP Scenario Analyzer</h2>
+                <p class="text-lg mb-6 text-center text-gray-700">Explore how different scenarios might impact Symbolic Collapse Pressure. Describe a situation or modifications to an epoch's characteristics below.</p>
+                
+                <div class="mb-4">
+                    <label for="scenarioEpoch" class="block text-sm font-medium text-gray-700 mb-1">Select Base Epoch/System:</label>
+                    <select id="scenarioEpoch" name="scenarioEpoch" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option value="Current Digital">Current Digital Epoch</option>
+                        <option value="Near-Future AI">Near-Future AI-Driven Epoch</option>
+                        <option value="Custom System">Custom System / Organization</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="scenarioDescription" class="block text-sm font-medium text-gray-700 mb-1">Describe Scenario (e.g., "Increased misinformation campaigns targeting social cohesion" or "New educational tools improving critical thinking at scale"):</label>
+                    <textarea id="scenarioDescription" name="scenarioDescription" rows="4" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter your scenario details here..."></textarea>
+                </div>
+
+                <button id="analyzeScenarioBtn" class="gemini-button w-full md:w-auto flex items-center justify-center">
+                    Analyze Scenario with Gemini ✨
+                    <span id="scenarioAnalyzerLoading" class="loading-spinner hidden ml-2"></span>
+                </button>
+
+                <div id="scenarioAnalysisResult" class="gemini-response-area hidden"></div>
+            </div>
+        </section>
+        
+        <section id="applications" class="my-12">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-semibold mb-8 text-center text-primary-accent">Applications: Putting 𝒞 to Work</h2>
+                <p class="text-lg mb-6 text-center text-gray-700">The Symbolic Collapse Pressure framework offers diverse applications for understanding and mitigating systemic risks.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-secondary-accent mb-3">🤖 AI Alignment & Reward Shaping</h3>
+                        <p class="text-gray-700 mb-3">Regulate AI behavior by penalizing states or outputs that increase 𝒞:</p>
+                        <div class="formula text-sm bg-white p-3 rounded shadow-inner">
+                           R<sub>total</sub> = R<sub>task</sub> - λ ⋅ 𝒞
+                        </div>
+                        <p class="text-gray-600 mt-3 text-sm">This integrates symbolic awareness into agent alignment, guiding behavior towards stability.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-secondary-accent mb-3">📰 News & Media Analysis</h3>
+                        <p class="text-gray-700 mb-3">Evaluate articles using manual or semi-automated inputs to assess:</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                            <li>Symbolic overload</li>
+                            <li>Abstraction detachment</li>
+                            <li>Frame polarization</li>
+                            <li>Epistemic integrity</li>
+                        </ul>
+                        <p class="text-gray-600 mt-3 text-sm">Enables real-time epistemic audits of communication channels.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-secondary-accent mb-3">🌐 Multi-Agent Systems</h3>
+                        <p class="text-gray-700 mb-3">Agents can share symbolic pressure states (𝒞) to cooperatively regulate:</p>
+                        <div class="flex flex-col items-center space-y-2 mt-4">
+                            <div class="flowchart-item text-sm">Agent A: State 𝒞<sub>A</sub></div>
+                            <div class="flowchart-arrow">↕</div>
+                            <div class="flowchart-item text-sm">Network Monitor (Σ𝒞)</div>
+                            <div class="flowchart-arrow">↕</div>
+                            <div class="flowchart-item text-sm">Agent B: State 𝒞<sub>B</sub></div>
+                        </div>
+                         <p class="text-gray-600 mt-3 text-sm text-center">Focus on network coherence, polarization onset, and collapse mitigation.</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-secondary-accent mb-3">🔬 Quantum Symbol Encoding</h3>
+                        <p class="text-gray-700 mb-3">Encode 𝒞 in a qubit to represent symbolic stress:</p>
+                        <div class="formula text-sm bg-white p-3 rounded shadow-inner">
+                           |ψ<sub>c</sub>⟩ = √(1 - 𝒞)|0⟩ + √𝒞|1⟩
+                        </div>
+                        <p class="text-gray-600 mt-3 text-sm">Allows a system to "remember" the stress of its symbolic state in quantum memory.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="limitations" class="my-12">
+            <div class="bg-white rounded-lg shadow-xl p-6 md:p-8">
+                <h2 class="text-3xl font-semibold mb-6 text-center text-primary-accent">Limitations & Future Directions</h2>
+                <p class="text-lg mb-6 text-center text-gray-700">While promising, the Symbolic Collapse Pressure model has current limitations that guide future research:</p>
+                <div class="max-w-2xl mx-auto">
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-400">
+                        <li><strong>Subjectivity of Component Scoring:</strong> Initial scoring of I, S, P, T, E can be subjective and requires robust methodologies.</li>
+                        <li><strong>Lack of Large-Scale Calibration:</strong> Benchmarks across diverse systems are needed for broader validation.</li>
+                        <li><strong>Sensitivity to Extremes:</strong> The model may be sensitive to extreme values in polarization or abstraction, requiring careful normalization.</li>
+                    </ul>
+                </div>
+                <p class="mt-6 text-lg text-center text-gray-700">Future work includes developing agent fine-tuning protocols based on 𝒞, creating automated content classifiers for real-time analysis, and exploring social collapse forecasting capabilities.</p>
+            </div>
+        </section>
+
+        <section id="conclusion" class="my-12">
+            <div class="bg-primary-accent text-white rounded-lg shadow-xl p-8 md:p-10 text-center">
+                <h2 class="text-3xl font-semibold mb-6">The Imperative of Semantic Integrity</h2>
+                <p class="text-xl mb-4">This formula reframes collapse not as a failure of hardware, but as a <strong class="text-yellow-300">failure of shared meaning</strong>. It is a tool to track the pressure building within symbolic systems before they snap.</p>
+                <p class="text-xl">It is not just a metric—but a <strong class="text-yellow-300">model of semantic integrity under stress.</strong> The time to stabilize meaning is now.</p>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 p-8 text-center">
+        <p class="mb-2">Symbolic Collapse Pressure model by Tristan Wheeler (fantomx42).</p>
+        <p class="text-sm">This infographic is based on the paper "Symbolic Collapse Pressure: A Diagnostic Framework for Epistemic and Civilizational Stability".</p>
+        <p class="text-xs mt-4">This work (original paper) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="underline hover:text-secondary-accent">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p>
+    </footer>
+
+    <div id="mitigationModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal('mitigationModal')">&times;</span>
+            <h3 id="mitigationModalTitle" class="text-2xl font-semibold mb-4 text-primary-accent">Mitigation Insights</h3>
+            <div id="mitigationModalBody" class="text-gray-700">
+                </div>
+            <div id="mitigationModalLoading" class="loading-spinner mx-auto my-4 hidden"></div>
+        </div>
+    </div>
+
+
+    <script>
+        function wrapLabel(str, maxWidth) {
+            if (typeof str !== 'string') return str; // Handle non-string inputs like arrays from previous wrapping
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const epochRawLabels = ['Oral', 'Written', 'Print', 'Digital', ['AI-driven', '(Projected)']];
+        const epochDataValues = [0.0069, 0.0429, 0.2143, 1.6800, 2.1600];
+
+        const epochData = {
+            labels: epochRawLabels.map(label => {
+                if (Array.isArray(label)) return label.map(l => wrapLabel(l,16));
+                return wrapLabel(label, 16);
+            }),
+            datasets: [{
+                label: 'Symbolic Collapse Pressure (𝒞)',
+                data: epochDataValues,
+                backgroundColor: epochDataValues.map(val => val >= 1.0 ? 'rgba(255, 127, 0, 0.7)' : 'rgba(10, 116, 218, 0.6)'),
+                borderColor: epochDataValues.map(val => val >= 1.0 ? 'rgba(255, 127, 0, 1)' : 'rgba(10, 116, 218, 1)'),
+                borderWidth: 1
+            }]
+        };
+
+        const epochalChartConfig = {
+            type: 'bar',
+            data: epochData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Calculated 𝒞 Value',
+                            font: { size: 14, weight: 'bold' },
+                            color: '#333'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Communication Epoch',
+                            font: { size: 14, weight: 'bold' },
+                            color: '#333'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Symbolic Collapse Pressure (𝒞) Across Epochs',
+                        font: { size: 18, weight: 'bold' },
+                        padding: { top:10, bottom: 20},
+                        color: '#0A74DA'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = epochRawLabels[item.dataIndex]; // Use raw labels for tooltip
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    },
+                    annotation: {
+                        annotations: {
+                            thresholdLine: {
+                                type: 'line',
+                                yMin: 1.0,
+                                yMax: 1.0,
+                                borderColor: 'rgb(220, 53, 69, 0.9)', // A more distinct red
+                                borderWidth: 2.5,
+                                borderDash: [6, 6],
+                                label: {
+                                    content: 'Ψ ≈ 1.0 (Collapse Threshold)',
+                                    enabled: true,
+                                    position: 'end',
+                                    yAdjust: -10,
+                                    backgroundColor: 'rgba(220, 53, 69, 0.7)',
+                                    font: { weight: 'bold', size:10 },
+                                    color: 'white',
+                                    padding: 4,
+                                    cornerRadius: 4
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        
+        // --- Gemini API Integration ---
+        const API_KEY = ""; // Provided by Canvas environment if needed, otherwise leave blank for gemini-2.0-flash
+        const GENERATE_CONTENT_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+
+        async function callGeminiAPI(prompt) {
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }]
+            };
+            try {
+                const response = await fetch(GENERATE_CONTENT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    console.error("API Error Response:", errorBody);
+                    throw new Error(`API request failed with status ${response.status}: ${errorBody}`);
+                }
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    console.error("Unexpected API response structure:", result);
+                    return "Error: Could not retrieve a valid response from the AI. Check console for details.";
+                }
+            } catch (error) {
+                console.error("Error calling Gemini API:", error);
+                return `Error: ${error.message}. Please check the browser console for more details.`;
+            }
+        }
+
+        // Scenario Analyzer
+        const scenarioEpochSelect = document.getElementById('scenarioEpoch');
+        const scenarioDescriptionTextarea = document.getElementById('scenarioDescription');
+        const analyzeScenarioBtn = document.getElementById('analyzeScenarioBtn');
+        const scenarioAnalyzerLoading = document.getElementById('scenarioAnalyzerLoading');
+        const scenarioAnalysisResultDiv = document.getElementById('scenarioAnalysisResult');
+
+        if (analyzeScenarioBtn) {
+            analyzeScenarioBtn.addEventListener('click', async () => {
+                const epoch = scenarioEpochSelect.value;
+                const description = scenarioDescriptionTextarea.value.trim();
+
+                if (!description) {
+                    scenarioAnalysisResultDiv.textContent = "Please describe a scenario.";
+                    scenarioAnalysisResultDiv.classList.remove('hidden');
+                    return;
+                }
+
+                scenarioAnalyzerLoading.classList.remove('hidden');
+                analyzeScenarioBtn.disabled = true;
+                scenarioAnalysisResultDiv.classList.add('hidden');
+
+                const prompt = `
+                    You are an expert analyst specializing in the Symbolic Collapse Pressure (SCP) framework.
+                    The SCP framework uses the formula C = (I * S * P) / (T * E) where:
+                    I = Information Load (volume of data)
+                    S = Symbolic Abstraction (degree of conceptual indirection)
+                    P = Polarization (value fragmentation or frame divergence)
+                    T = Transmission Fidelity (clarity and accuracy of idea transmission)
+                    E = Epistemic Coherence (internal consistency and logical integration of knowledge)
+                    A higher C value indicates greater symbolic collapse pressure. The collapse threshold is around C = 1.0.
+
+                    A user is exploring a scenario within the context of "${epoch}".
+                    The user's scenario description is: "${description}"
+
+                    Please provide a qualitative analysis:
+                    1.  Potential Impact: How might this scenario qualitatively affect the overall Symbolic Collapse Pressure (C)? (e.g., likely increase, decrease, or have mixed effects on C).
+                    2.  Reasoning: Briefly explain why, referencing which components (I,S,P,T,E) are most likely to be affected and how.
+                    3.  Key Focus Areas: Suggest 2-3 key areas or factors that would be most critical to monitor or address to maintain symbolic stability in this scenario.
+
+                    Present your analysis clearly and concisely.
+                `;
+                const resultText = await callGeminiAPI(prompt);
+                scenarioAnalysisResultDiv.textContent = resultText;
+                scenarioAnalysisResultDiv.classList.remove('hidden');
+                scenarioAnalyzerLoading.classList.add('hidden');
+                analyzeScenarioBtn.disabled = false;
+            });
+        }
+
+        // Mitigation Insights
+        const mitigationModal = document.getElementById('mitigationModal');
+        const mitigationModalTitle = document.getElementById('mitigationModalTitle');
+        const mitigationModalBody = document.getElementById('mitigationModalBody');
+        const mitigationModalLoading = document.getElementById('mitigationModalLoading');
+        
+        function openModal(modalId, titleContent = "Insights") {
+            const modal = document.getElementById(modalId);
+            if (modalId === 'mitigationModal' && mitigationModalTitle) {
+                mitigationModalTitle.textContent = titleContent;
+            }
+            if(modal) modal.style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if(modal) modal.style.display = "none";
+            if (modalId === 'mitigationModal' && mitigationModalBody) {
+                 mitigationModalBody.innerHTML = ''; // Clear previous content
+            }
+        }
+        
+        // Close modal if user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == mitigationModal) {
+                closeModal('mitigationModal');
+            }
+        }
+
+        async function getMitigationInsights(epochName) {
+            openModal('mitigationModal', `Mitigation Insights for ${epochName} Epoch`);
+            mitigationModalBody.innerHTML = ''; // Clear previous content
+            mitigationModalLoading.classList.remove('hidden');
+
+            const prompt = `
+                You are an expert strategist focusing on mitigating Symbolic Collapse Pressure (SCP).
+                The SCP framework (C = (I*S*P)/(T*E)) indicates that the "${epochName}" epoch is experiencing high symbolic collapse pressure (C > 1.0).
+                This means factors like Information Load (I), Symbolic Abstraction (S), and/or Polarization (P) are high,
+                while Transmission Fidelity (T) and/or Epistemic Coherence (E) are low.
+
+                Please suggest 3-4 actionable and creative strategies or policy ideas to help mitigate the high symbolic collapse pressure specifically for the "${epochName}" epoch.
+                For each strategy, briefly explain how it would help improve T or E, or reduce I, S, or P.
+                Focus on practical and impactful ideas.
+            `;
+            const resultText = await callGeminiAPI(prompt);
+            mitigationModalBody.innerHTML = resultText.replace(/\n/g, '<br>'); // Simple formatting
+            mitigationModalLoading.classList.add('hidden');
+        }
+
+        function addMitigationButtons() {
+            const container = document.getElementById('mitigationInsightsContainer');
+            if (!container) return;
+
+            epochRawLabels.forEach((label, index) => {
+                const epochName = Array.isArray(label) ? label[0] : label; // Get primary name
+                const cValue = epochDataValues[index];
+
+                if (cValue >= 1.0) { // Only for epochs above threshold
+                    const buttonDiv = document.createElement('div');
+                    buttonDiv.classList.add('text-center', 'mt-4');
+                    
+                    const button = document.createElement('button');
+                    button.classList.add('gemini-button', 'mx-auto');
+                    button.innerHTML = `✨ Get Mitigation Insights for ${epochName} Epoch <span id="mitigationLoading-${index}" class="loading-spinner hidden ml-2"></span>`;
+                    button.onclick = () => getMitigationInsights(epochName);
+                    
+                    buttonDiv.appendChild(button);
+                    container.appendChild(buttonDiv);
+                }
+            });
+        }
+
+
+        window.onload = function() {
+            const ctxSimulations = document.getElementById('epochalSimulationsChart');
+            if (ctxSimulations) {
+                 // Register the annotation plugin if it's not globally registered by CDN
+                if (typeof Chart.plugins !== 'undefined' && typeof Chart.plugins.register !== 'undefined' && Chart.registry.plugins.get('annotation') === undefined) {
+                     Chart.plugins.register(window['chartjs-plugin-annotation']);
+                } else if (Chart.registry.plugins.get('annotation') === undefined && window['chartjs-plugin-annotation']) {
+                    Chart.register(window['chartjs-plugin-annotation']);
+                }
+                 new Chart(ctxSimulations, epochalChartConfig);
+            } else {
+                console.error("Canvas element for epochal simulations chart not found.");
+            }
+            addMitigationButtons();
+        };
+    </script>
+</body>
+</html>
+
