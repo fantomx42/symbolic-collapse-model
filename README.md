@@ -41,6 +41,39 @@ This model allows researchers, policymakers, educators, and analysts to:
 - Simulate scenarios for intervention and stabilization.
 - Identify critical thresholds before symbolic breakdown occurs.
 
+## Interactive Collapse Simulator Zones
+
+This repository includes an interactive symbolic collapse simulator based on the formula:
+
+\[
+\mathcal{C} = \frac{I \cdot S \cdot P}{T \cdot E}
+\]
+
+Where:
+- **I**: Information Load  
+- **S**: Symbolic Abstraction  
+- **P**: Polarization  
+- **T**: Transmission Fidelity  
+- **E**: Epistemic Coherence  
+
+---
+
+### Collapse Status Zones
+
+The simulator now provides three distinct symbolic collapse zones based on the adaptive threshold \(\Psi(t, T, E)\):
+
+| Zone               | Condition                               | Meaning                                 |
+|--------------------|------------------------------------------|-----------------------------------------|
+| 🟢 **Stable**       | \(\mathcal{C} < 0.5 \cdot \Psi\)         | Low collapse pressure; system resilient |
+| 🟡 **Warning**      | \(0.5 \cdot \Psi \leq \mathcal{C} < \Psi\)| Medium pressure; vulnerabilities growing |
+| 🔴 **Collapse Likely** | \(\mathcal{C} \geq \Psi\)              | High risk of symbolic breakdown         |
+
+This system helps visualize symbolic strain from information overload, abstraction, and polarization across time and contexts.
+
+---
+
+**Run the simulation** in [Colab](https://colab.research.google.com/github/fantomx42/symbolic-collapse-model/blob/main/symbolic_collapse_simulator.ipynb) or [Binder](https://mybinder.org/v2/gh/fantomx42/symbolic-collapse-model/main?filepath=symbolic_collapse_simulator.ipynb) to test how different variables affect collapse.
+
 ## License
 
 This work is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**.
