@@ -1,4 +1,6 @@
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fantomx42/symbolic-collapse-model/blob/main/symbolic_collapse_simulator.ipynb)
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/fantomx42/symbolic-collapse-model/main?filepath=symbolic_collapse_simulator.ipynb)
 # Symbolic Collapse Model
 
 ## Overview
