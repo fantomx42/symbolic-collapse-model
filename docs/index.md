@@ -47,7 +47,7 @@ Where \(\Psi\) represents the system’s ability to handle symbolic strain. It d
 
 ## 4. Visual Zones
 
-![collapse-zones.png](collapse-zones.png)
+![Realistic Collapse Zones](realistic-collapse-zones.png)
 
 Green = Stable  
 Yellow = Warning  
