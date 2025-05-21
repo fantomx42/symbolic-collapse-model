@@ -1,8 +1,8 @@
 # Symbolic Collapse Model
 
-**A universal diagnostic tool for measuring symbolic collapse pressure in individuals, institutions, AI systems, and civilizations.**
+**A universal diagnostic framework for measuring symbolic collapse pressure in individuals, institutions, AI systems, and civilizations.**
 
-This project introduces a fractal equation that quantifies when and how symbolic systems begin to break down—from miscommunication and polarization to cognitive overload and systemic failure. It includes a working mathematical model, example scenarios, and a conceptual framework that applies across scales—from personal identity to global media to cosmic abstraction collapse.
+This project introduces a fractal, cross-domain model that quantifies when and how symbolic systems break down—from cognitive overload and polarization to epistemic drift and civilizational failure. The model is evolving toward scientific rigor with operational definitions, falsifiability protocols, and system-agnostic application.
 
 ---
 
@@ -30,23 +30,65 @@ Where:
 
 ## Purpose
 
-This model is intended to be used for:
+SCM is designed to serve as a:
 
-- **AI alignment and epistemic safety** — Preventing miscommunication and symbolic overload in intelligent systems.
-- **Civilizational diagnostics** — Modeling and comparing the collapse pressure of different societies, institutions, or ideologies.
-- **Media and narrative analysis** — Evaluating how news, propaganda, or entertainment may fracture shared meaning.
-- **Philosophical and theoretical exploration** — Framing collapse across scales, including speculative and post-human contexts.
-
-It is a **fractal model**, designed to apply from micro (personal cognition) to macro (planetary or cosmic abstraction failure). Use it to identify thresholds of symbolic overload before coherence fails.
+- **Diagnostic tool** for epistemic integrity in AI, institutions, and media ecosystems
+- **Theoretical framework** for symbolic failure and collapse modeling across scales
+- **Epistemic safety layer** for AI alignment and distributed cognitive systems
+- **Simulable structure** for civilizational forecasting, historical comparison, and narrative modeling
 
 ---
 
-## Example Use Cases
+## Operational Definitions (Proxies)
 
-- Scoring real-world news articles or debates for symbolic fracture.
-- Modeling epistemic breakdown in polarized environments.
-- Visualizing collapse pressure over time in historic or speculative eras.
-- Teaching systems thinking, semiotics, or AI ethics through interactive scenarios.
+To bridge conceptual clarity and empirical application, SCM variables are being mapped to measurable proxies:
+
+| Variable | Description | Early Proxies |
+|----------|-------------|---------------|
+| **I** | Volume and complexity of symbols | Token count, compression ratio |
+| **S** | Degree of abstraction and referential distance | Metaphor density, embedding divergence |
+| **P** | Symbolic divergence or opposition | Semantic cluster divergence, polarity spread |
+| **T** | Signal clarity and interpretability | BLEU scores, error rates, paraphrase fidelity |
+| **E** | Internal consistency and epistemic structure | Contradiction rate, logical coherence scores |
+
+These enable LLM-based scoring, NLP pipelines, and real-time applications.
+
+---
+
+## Model Refinement Roadmap
+
+SCM is evolving from a static formula into a **dynamical symbolic integrity model**:
+
+- Replacing linear scaling with **feedback-driven dynamics**
+- Defining **collapse zones** (e.g., 𝒞 > 10 = breakdown likely)
+- Mapping symbolic fracture as a **gradient over networks, discourse, or neural systems**
+- Extending into hardware and AI inference monitoring
+
+---
+
+## Collapse Zones (Preliminary)
+
+| 𝒞 Range | Collapse Risk |
+|---------|----------------|
+| 0–3     | Stable |
+| 3–7     | Symbolic stress |
+| 7–10    | Fragmentation likely |
+| 10+     | Imminent collapse |
+
+Thresholds will be refined through empirical studies.
+
+---
+
+## Falsifiability and Testing Strategy
+
+SCM is being structured to enable falsifiability and predictive utility:
+
+- **Historical Analysis**: Apply SCM to known collapse points (USSR, Rome, modern polarization)
+- **Predictive Trials**: Score symbolic collapse pressure in ongoing systems (e.g., LLM output, public discourse)
+- **Disproof Conditions**:
+  - Consistent collapses at low 𝒞
+  - Persistent high 𝒞 without breakdown
+  - Inability to map variables to measurable values
 
 ---
 
@@ -55,58 +97,30 @@ It is a **fractal model**, designed to apply from micro (personal cognition) to 
 ```bash
 symbolic-collapse-model/
 ├── index.html            # Main interface (WIP)
-├── simulator.js          # Collapse pressure logic (WIP)
-├── style.css             # Visual layout (WIP)
-├── README.md             # This file
-├── LICENSE               # License info (CC BY-NC-SA 4.0)
-├── model-responses/      # Outputs from GPT, Claude, etc.
-├── scenarios/            # Historical or hypothetical examples
+├── simulator.js          # Collapse calculator logic
+├── model-responses/      # LLM response tests
+├── scenarios/            # Real-world examples and datasets
+├── LICENSE               # CC BY-NC-SA 4.0 License
 ├── contributing.md       # Contribution guidelines
-└── whitepaper.pdf        # (Coming soon) Full write-up
+├── whitepaper.pdf        # (Coming soon)
+└── README.md             # You're here
 ```
 
 ---
 
 ## License
 
-This project is licensed under the  
-**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**
-
-You are free to:
-
-- **Share** — copy and redistribute the material in any medium or format
-- **Adapt** — remix, transform, and build upon the material
-
-Under the following terms:
-
-- **Attribution** — You must give appropriate credit.
-- **NonCommercial** — You may not use the material for commercial purposes.
-- **ShareAlike** — If you remix or transform, you must license your contributions under the same terms.
-
-For full details, see [`LICENSE`](./LICENSE)
-
----
-
-## How to Contribute
-
-This project welcomes ideas, feedback, and collaborators.
-
-- Fork the repo
-- Submit pull requests
-- Open issues with suggestions or questions
-- Help expand scenario libraries or improve the simulator
-
-See: [`contributing.md`](./contributing.md)
-
----
-
-## Author
-
-Created by [fantomx42](https://github.com/fantomx42)  
-Part of an original research effort to model communication breakdown, identity fragmentation, and collapse dynamics in complex symbolic systems.
+**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**  
+You are free to share and adapt non-commercially with credit and ShareAlike terms. See `LICENSE`.
 
 ---
 
 ## Summary
 
-> Wherever symbols encode reality, collapse can occur. This model lets us see it coming.
+> Wherever symbols encode reality, collapse can occur. This model lets us see it coming—before it breaks.
+
+---
+
+## Author
+
+Created by [fantomx42](https://github.com/fantomx42) as part of an open research project on symbolic integrity, systemic failure, and epistemic safety across intelligent systems.
