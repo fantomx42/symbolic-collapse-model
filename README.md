@@ -11,9 +11,9 @@ The **Symbolic Collapse Model (SCM)** is a diagnostic tool designed to detect wh
 
 At its core is a simple but powerful equation:
 
-\[
-\mathcal{C} = \frac{I \cdot S \cdot P}{T \cdot E}
-\]
+$begin:math:display$
+\\mathcal{C} = \\frac{I \\cdot S \\cdot P}{T \\cdot E}
+$end:math:display$
 
 | Symbol | Meaning |
 |--------|---------|
@@ -114,20 +114,13 @@ This rubric allows any user—human or AI—to **score a symbolic system** based
 
 ---
 
-### Why the Rubric Matters
-
-This rubric turns SCM from a theoretical idea into a **practical tool**.  
-It ensures symbolic collapse risk is **scored transparently and consistently**, using observable traits—not arbitrary guesses.
-
----
-
 ## Collapse Zones
 
 After scoring, calculate:
 
-\[
-\mathcal{C} = \frac{I \cdot S \cdot P}{T \cdot E}
-\]
+$begin:math:display$
+\\mathcal{C} = \\frac{I \\cdot S \\cdot P}{T \\cdot E}
+$end:math:display$
 
 Then interpret the result:
 
@@ -140,12 +133,36 @@ Then interpret the result:
 
 ---
 
-## Example Use Cases
+## From Measurement to Action
 
-- Scoring a political speech for symbolic fracture risk  
-- Analyzing AI outputs for abstraction overload and contradiction  
-- Mapping ideological conflict in social networks  
-- Diagnosing why institutions or messages “just don’t land anymore”  
+SCM isn’t just a warning system. It’s a tool for **diagnosing** and **repairing** symbolic breakdowns.
+
+Once you calculate 𝒞 using the rubric, you can identify which variable(s) are driving collapse pressure—and apply targeted interventions.
+
+| Variable | What It Signals | What You Can Fix |
+|----------|------------------|------------------|
+| **I**: Info Load | Overload, firehose of content | Summarize, filter, chunk, slow input |
+| **S**: Symbolic Abstraction | Detached, vague, ideology-saturated | Reground in real examples, reduce metaphor, clarify terms |
+| **P**: Polarization | Interpretive fracture | Neutral framing, viewpoint diversity, empathy modeling |
+| **T**: Transmission Fidelity | Ambiguity, miscommunication | Repeat, simplify, define terms, structure clearly |
+| **E**: Epistemic Coherence | Contradiction, confusion | Add sourcing, fact-checking, logical scaffolding |
+
+### Example:
+If 𝒞 is high and **E** is low → improve coherence (add evidence, clarify logic).  
+If **I** is high and **T** is low → slow the info flow and add structure.
+
+**Recalculate after intervention.** If 𝒞 drops, your system is stabilizing.
+
+---
+
+### Use It Anywhere:
+
+- In newsrooms: filter and clarify when overload hits  
+- In AI systems: self-monitor and reduce abstraction or contradiction  
+- In communities: detect symbolic fracture before discourse collapses  
+- In policy: track epistemic decay across institutions or belief systems
+
+> SCM lets you *see* collapse forming—then gives you a grip to *pull it back*.
 
 ---
 
