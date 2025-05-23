@@ -1,21 +1,40 @@
-
 # Contributing Guidelines
 
-We welcome thoughtful contributions to the Symbolic Collapse Model, especially from those interested in systems thinking, communication theory, sociology, and information science.
+We welcome thoughtful contributions to the **Symbolic-Collapse Model (SCM)** from anyone interested in systems thinking, communication theory, sociology, information science, or related fields. Whether you have empirical data, theoretical tweaks, or a bug fix—thank you for helping keep the project rigorous and useful.
 
-## How to Contribute
-- Fork the repo and create a pull request for edits or additions.
-- Submit bug reports or suggestions via GitHub Issues.
-- Share real-world case studies or empirical data tied to the model.
-- Propose theoretical extensions or adjustments with justification.
+---
 
-## Ground Rules
-- Respect the model’s open-access, non-commercial spirit.
-- Cite your sources and clearly distinguish between personal insights and formal claims.
-- If proposing changes to the equation, describe the rationale and intended impact.
+## 1 How to contribute
 
-## Attribution and License
-This project uses the Creative Commons Attribution–NonCommercial–ShareAlike 4.0 License. Any contributions must remain under this license unless explicitly approved otherwise.
+1. **Fork → branch → pull request**  
+   • Name your branch descriptively, e.g. `fix/entropy-typo` or `feat/weighted-lambda`.  
+   • Keep PRs focused; separate unrelated changes.
 
-Together we can refine a tool that helps make sense of complex systems before they fracture.
+2. **Open an Issue** for:  
+   • Bug reports (repro steps + expected vs. actual).  
+   • Feature proposals (short rationale + suggested approach).  
+   • Data-set offers or real-world case studies.
 
+3. **Join the discussion**  
+   Comment on existing Issues/PRs if you can supply data, citations, or experience.
+
+---
+
+## 2 Ground rules
+
+| Rule | Why it exists |
+|------|---------------|
+| **Respect CC BY-NC-SA 4.0 license** | Keeps the model open & non-commercial. |
+| **Cite your sources** | Claims without references may be removed. |
+| **Describe equation changes** | Explain intended effect on 𝒞 or risk zones. |
+| **Stay civil** | No harassment or flame-wars. See Code of Conduct. |
+
+---
+
+## 3 Project layout
+
+```text
+/src/          core TypeScript library
+/docs/         math appendix, design notes
+/notebooks/    calibration & data analysis
+/examples/     minimal “hello SCM” demos
