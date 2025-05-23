@@ -1,6 +1,6 @@
-# ≡ƒôÉ Symbolic Collapse Model ΓÇô Mathematical Appendix
+# 📐 Symbolic Collapse Model – Mathematical Appendix
 
-## ≡¥Æ₧: Collapse Pressure Formula
+## 𝒞: Collapse Pressure Formula
 
 The core metric for symbolic system strain is defined as:
 
@@ -16,20 +16,20 @@ Where:
 
 This models how overload and fragmentation ($I, S, P$) interact with stabilizing forces ($T, E$) in communication and reasoning systems.
 
-## ≡ƒºá Risk Thresholds
+## 🧠 Risk Thresholds
 
 These qualitative thresholds interpret symbolic collapse pressure:
 
-| Collapse Pressure (≡¥Æ₧) | Risk Zone          |
+| Collapse Pressure (𝒞) | Risk Zone          |
 | :-------------------- | :----------------- |
-| ≡¥Æ₧ < 1.5               | Γ£à Stable          |
-| 1.5 Γëñ ≡¥Æ₧ < 2.5         | ΓÜá∩╕Å Symbolic Stress |
-| 2.5 Γëñ ≡¥Æ₧ < 3.5         | ≡ƒÜº Narrative Fracture |
-| ≡¥Æ₧ ΓëÑ 3.5               | ≡ƒöÑ Collapse Zone   |
+| 𝒞 < 1.5               | ✅ Stable          |
+| 1.5 ≤ 𝒞 < 2.5         | ⚠️ Symbolic Stress |
+| 2.5 ≤ 𝒞 < 3.5         | 🚧 Narrative Fracture |
+| 𝒞 ≥ 3.5               | 🔥 Collapse Zone   |
 
 Use these zones to annotate simulation output or UI feedback.
 
-## ≡ƒº« Optional Extensions
+## 🧮 Optional Extensions
 
 ### 1. Weighted Sensitivity (Power-Law Modulation)
 
@@ -66,9 +66,9 @@ Systems with high $T$ or $E$ may dampen collapse over time:
 
 $$ \mathcal{C}_{t+1} = \mathcal{C}_t \cdot (1 - r) \quad \text{if } T,E > \text{threshold} $$
 
-Where $r$ is the resilience factor (e.g., 10ΓÇô30%).
+Where $r$ is the resilience factor (e.g., 10–30%).
 
-## ≡ƒôè Visualization Tips
+## 📊 Visualization Tips
 
 * Use a live graph of $\mathcal{C}$ over time.
 * Shade background according to collapse zones.
