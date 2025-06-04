@@ -1,0 +1,59 @@
+{
+  "SCM_V2": {
+    "description": "Symbolic Collapse Model – V2 (adds variable coupling, temporal dynamics, and cultural baselines).",
+    "core_formula": "𝒞 = ((S * I * P) * γ) / ((T * E) * λ)",
+    "variables": {
+      "T": { "name": "Transmission Fidelity", "scale": "0–1" },
+      "E": { "name": "Epistemic Coherence",   "scale": "0–1" },
+      "S": { "name": "Symbolic Overload",     "scale": "0–1" },
+      "I": { "name": "Interpretive Drift",    "scale": "0–1" },
+      "P": { "name": "Polarization Index",    "scale": "0–1" }
+    },
+    "coupling": {
+      "gamma": "Amplification factor ≥1 from reinforcing loops (default 1).",
+      "lambda": "Mitigation factor ≥1 from stabilizing loops (default 1).",
+      "matrix": {
+        "S→I": 0.15,
+        "P→I": 0.20,
+        "P→S": 0.10,
+        "T→E": -0.10,
+        "E→T": -0.05
+      },
+      "rule": "γ = 1 + Σ(positive coefficients); λ = 1 + Σ|negative coefficients|."
+    },
+    "temporal_model": {
+      "dC/dt": "α*(I*P) - β*(T*E)",
+      "alpha": 0.8,
+      "beta": 0.6,
+      "interpretation": "Positive slope ⇒ accelerating collapse; negative ⇒ recovering stability."
+    },
+    "cultural_profile": {
+      "audience_id": "GEN_Z_US_2020s",
+      "baseline": { "T": 0.65, "E": 0.55, "S": 0.80, "I": 0.75, "P": 0.90 },
+      "usage": "Subtract baseline from raw scores before applying core formula."
+    },
+    "output_format": {
+      "type": "JSON",
+      "example": {
+        "T": 0.70,
+        "E": 0.60,
+        "S": 0.85,
+        "I": 0.80,
+        "P": 0.95,
+        "gamma": 1.13,
+        "lambda": 1.15,
+        "C": 1.04,
+        "dC_dt": 0.46,
+        "risk_band": "High",
+        "summary": "Culturally amplified symbolism with strong polarization; collapse pressure trending upward."
+      }
+    },
+    "risk_bands": {
+      "Stable":     "𝒞 < 0.40",
+      "Manageable": "0.40 ≤ 𝒞 < 0.70",
+      "High":       "0.70 ≤ 𝒞 < 1.00",
+      "Critical":   "𝒞 ≥ 1.00"
+    },
+    "evaluation_prompt": "Evaluate the symbolic collapse pressure (𝒞) of the following content using SCM_V2. Apply the GEN_Z_US_2020s baseline. Return JSON with T, E, S, I, P, γ, λ, C, dC_dt, risk_band, and a brief summary."
+  }
+}
