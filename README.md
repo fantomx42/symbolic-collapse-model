@@ -29,12 +29,6 @@ Higher 𝒞 ⇒ higher collapse risk.
 
 ---
 
-## What you can do with SCM **today**
-
-* **Rust core library** – embed real‑time 𝒞 scoring in any app.
-* **Web simulator** – move sliders, watch stability fracture or heal.
-* **CLI tools** – batch‑score text, social feeds, or CSV data.
-
 ## What I hope SCM enables **tomorrow**
 
 * **Browser filters** that hide or reorder high‑𝒞 content before it overwhelms us.
