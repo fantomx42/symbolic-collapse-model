@@ -1,0 +1,6 @@
+{
+  "name": "Symbolic Collapse Model Explorer",
+  "description": "An interactive web application to explore, simulate, and understand the Symbolic Collapse Model (SCM) for measuring epistemic degradation. Includes an SCM calculator, visualizer, and Gemini AI integration for contextual analysis.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
