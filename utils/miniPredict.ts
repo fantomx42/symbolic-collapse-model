@@ -1,4 +1,12 @@
-// Mock neural network prediction function
+/**
+ * A mock neural network prediction function.
+ *
+ * This function takes a string as input and returns a prediction of the
+ * topic of the string.
+ *
+ * @param {string} input - The input string.
+ * @returns {string} The predicted topic of the string.
+ */
 export function miniPredict(input: string): string {
   const lowerInput = input.toLowerCase();
   if (lowerInput.includes("alien") || lowerInput.includes("ufo") || lowerInput.includes("conspiracy")) return "Conspiracy";

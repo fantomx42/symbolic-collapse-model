@@ -6,6 +6,15 @@ interface TrendArrowProps {
   direction: TrendDirection;
 }
 
+/**
+ * A React component that displays a trend arrow.
+ *
+ * This component displays an arrow that indicates the trend of a value. The
+ * arrow can be up, down, or stable.
+ *
+ * @param {TrendArrowProps} props - The props for the component.
+ * @returns {JSX.Element | null} The rendered component, or null if the trend is "none".
+ */
 export const TrendArrow: React.FC<TrendArrowProps> = ({ direction }) => {
   let arrowChar = '';
   let colorClass = 'text-gray-500'; // Default for stable or none

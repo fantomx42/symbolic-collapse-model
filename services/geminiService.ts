@@ -1,8 +1,12 @@
 
-// This file is kept for structural completeness as per the prompt's guidance.
-// However, for this specific single-file structure request, the Gemini API interaction logic
-// has been embedded directly within the `GeminiInteraction.tsx` component for easier bundling
-// and to avoid complex import/export scenarios that might be problematic in some restricted environments.
+/**
+ * @file This file is intended to contain the logic for interacting with the
+ * Gemini API. However, for this specific single-file structure request, the
+ * Gemini API interaction logic has been embedded directly within the
+ * `GeminiInteraction.tsx` component for easier bundling and to avoid complex
+ * import/export scenarios that might be problematic in some restricted
+ * environments.
+ */
 
 // import { GoogleGenAI, GenerateContentResponse } from '@google/genai'; // Correct import
 // import { SCMParameters } from '../types';
@@ -12,6 +16,16 @@
 /*
 Example of how this service could be structured if separated:
 
+/**
+ * Calls the Gemini API with the given prompt and SCM parameters.
+ *
+ * @param {string} promptText - The prompt to send to the Gemini API.
+ * @param {string} modelName - The name of the Gemini model to use.
+ * @param {SCMParameters} [scmParams] - The SCM parameters to use.
+ * @returns {Promise<string>} A promise that resolves with the response from the
+ * Gemini API.
+ */
+/*
 export const callGeminiAPI = async (
   promptText: string,
   modelName: string,

@@ -10,6 +10,14 @@ interface SparklineProps {
   maxDomain?: number; // Optional fixed max for y-axis
 }
 
+/**
+ * A React component that displays a sparkline chart.
+ *
+ * This component uses D3.js to render a sparkline chart of the given data.
+ *
+ * @param {SparklineProps} props - The props for the component.
+ * @returns {JSX.Element} The rendered component.
+ */
 export const Sparkline: React.FC<SparklineProps> = ({
   data,
   width = 70, // Adjusted for potentially better fit

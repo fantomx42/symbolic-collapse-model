@@ -1,6 +1,13 @@
 
 import React from 'react';
 
+/**
+ * A React component that displays the header of the application.
+ *
+ * This component displays the title of the application and a logo.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 export const Header: React.FC = () => {
   return (
     <header className="bg-gray-800 bg-opacity-50 shadow-lg backdrop-blur-md sticky top-0 z-50">

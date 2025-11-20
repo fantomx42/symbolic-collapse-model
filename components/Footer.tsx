@@ -1,6 +1,13 @@
 
 import React from 'react';
 
+/**
+ * A React component that displays the footer of the application.
+ *
+ * This component displays a list of references and a copyright notice.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 export const Footer: React.FC = () => {
   const references = [
     { name: "Shannon, C. E. (1948). A mathematical theory of communication.", text: "Bell System Technical Journal." },

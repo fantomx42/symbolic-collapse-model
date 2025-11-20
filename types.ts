@@ -1,17 +1,26 @@
+
 export interface SCMVariables {
-  I: number; // Information Load
-  S: number; // Symbolic Abstraction
-  P: number; // Polarization
-  T: number; // Transmission Fidelity
-  E: number; // Epistemic Coherence
+  T: number; // Timelessness
+  E: number; // Emotional Energy
+  S: number; // Structural Coherence
+  I: number; // Interpretive Flexibility
+  P: number; // Parasitic Load
 }
 
 export interface SCMParameters extends SCMVariables {
-  lambda: number; // Entropy acceleration coefficient
-  time: number;   // Time
-  R_memory: number; // Resilience: Memory Depth
-  R_redundancy: number; // Resilience: Institutional Redundancy
-  R_anchoring: number; // Resilience: Semantic Anchoring
+  // Modifiers
+  time_since_reinforcement: number;
+  nostalgia_weight: number;
+  erf: number;
+  delta_X: number;
+  T_max: number;
+  E_max: number;
+  S_max: number;
+  I_max: number;
+  P_max: number;
+  lambda_lock: number;
+  // Baseline for baseline lock
+  baseline: SCMVariables;
 }
 
 export enum CollapseZone {
@@ -22,12 +31,10 @@ export enum CollapseZone {
 }
 
 export interface SCMCalculatedValues {
-  cRaw: number; // Renamed from C_base
-  C_t: number;
-  cEffective: number;
-  zone: CollapseZone; // Zone based on cEffective
-  zoneRaw: CollapseZone; // Zone based on cRaw
-  R: number; // Combined Resilience factor
+  stability_score: number;
+  collapse_pressure: number;
+  confidence: number;
+  zone: CollapseZone;
 }
 
 export enum TrendDirection {
@@ -46,7 +53,7 @@ export interface Particle {
   path: VisNode[]; // Sequence of nodes to follow
   currentPathIndex: number; // Index in the 'path' array
   progress: number; // Progress towards current targetX, targetY (0 to 1)
-  speed: number; 
+  speed: number;
   color: string;
   opacity: number;
   size: number;

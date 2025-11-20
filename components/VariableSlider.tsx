@@ -13,6 +13,15 @@ interface VariableSliderProps {
   onChange: (value: number) => void;
 }
 
+/**
+ * A React component that displays a slider for a variable.
+ *
+ * This component displays a slider that allows the user to adjust the value
+ * of a variable. It also displays the current value of the variable.
+ *
+ * @param {VariableSliderProps} props - The props for the component.
+ * @returns {JSX.Element} The rendered component.
+ */
 export const VariableSlider: React.FC<VariableSliderProps> = ({
   id,
   label,

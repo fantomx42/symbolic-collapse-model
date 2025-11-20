@@ -14,7 +14,7 @@ import { SCMNNPlayground } from './components/SCMNNPlayground'; // Import new co
 import { computeSCMInternal, mapValueToZone } from './utils/scmUtils'; // Import from new util file
 
 // Action types for scmParams reducer
-type SCMParamAction = 
+type SCMParamAction =
   | { type: 'SET_PARAM'; key: keyof SCMParameters; value: number }
   | { type: 'SET_ALL_PARAMS'; payload: SCMParameters };
 
@@ -22,15 +22,9 @@ type SCMParamAction =
 const scmParamsReducer = (state: SCMParameters, action: SCMParamAction): SCMParameters => {
   switch (action.type) {
     case 'SET_PARAM':
-      if ((action.key === 'T' || action.key === 'E') && action.value < 0.1) {
-        return { ...state, [action.key]: 0.1 };
-      }
       return { ...state, [action.key]: action.value };
     case 'SET_ALL_PARAMS':
-      const validatedPayload = {...action.payload};
-      if (validatedPayload.T < 0.1) validatedPayload.T = 0.1;
-      if (validatedPayload.E < 0.1) validatedPayload.E = 0.1;
-      return validatedPayload;
+      return action.payload;
     default:
       return state;
   }
@@ -38,16 +32,27 @@ const scmParamsReducer = (state: SCMParameters, action: SCMParamAction): SCMPara
 
 const MAX_HISTORY_POINTS = 30;
 
+/**
+ * The main component of the SCM Interactive Explorer application.
+ *
+ * This component renders the entire application, including the header, footer,
+ * and all the interactive sections. It also manages the state of the SCM
+ * parameters and the calculated values.
+ *
+ * @returns {JSX.Element} The rendered component.
+ */
 const App: React.FC = () => {
   const [scmParams, dispatchScmParams] = useReducer(scmParamsReducer, DEFAULT_SCM_PARAMETERS);
-  
+
   const previousScmParamsRef = useRef<SCMParameters | null>(null);
   const previousCalculatedValuesRef = useRef<SCMCalculatedValues | null>(null);
 
   const [scmParamsHistory, setScmParamsHistory] = useState<SCMParameterHistory>(() => {
     const initialHistory: SCMParameterHistory = {} as SCMParameterHistory;
     (Object.keys(DEFAULT_SCM_PARAMETERS) as Array<keyof SCMParameters>).forEach(key => {
-        initialHistory[key] = [DEFAULT_SCM_PARAMETERS[key]]; 
+        if (key !== 'baseline') {
+            initialHistory[key] = [DEFAULT_SCM_PARAMETERS[key] as number];
+        }
     });
     return initialHistory;
   });
@@ -65,14 +70,16 @@ const App: React.FC = () => {
     setScmParamsHistory(prevHistory => {
         const newHistory = { ...prevHistory } as SCMParameterHistory;
         (Object.keys(scmParams) as Array<keyof SCMParameters>).forEach(key => {
-            const currentValue = scmParams[key];
-            const historyForKey = prevHistory[key] ? [...prevHistory[key]] : [];
-            
-            historyForKey.push(currentValue);
-            if (historyForKey.length > MAX_HISTORY_POINTS) {
-                historyForKey.shift(); 
+            if (key !== 'baseline') {
+                const currentValue = scmParams[key] as number;
+                const historyForKey = prevHistory[key] ? [...prevHistory[key]] : [];
+
+                historyForKey.push(currentValue);
+                if (historyForKey.length > MAX_HISTORY_POINTS) {
+                    historyForKey.shift();
+                }
+                newHistory[key] = historyForKey;
             }
-            newHistory[key] = historyForKey;
         });
         return newHistory;
     });
@@ -84,11 +91,11 @@ const App: React.FC = () => {
   }, [calculatedValues]);
 
   const scmVariablesForVisualizer: SCMVariables = {
-    I: scmParams.I,
-    S: scmParams.S,
-    P: scmParams.P,
     T: scmParams.T,
     E: scmParams.E,
+    S: scmParams.S,
+    I: scmParams.I,
+    P: scmParams.P,
   };
 
   return (
@@ -97,15 +104,15 @@ const App: React.FC = () => {
       <main className="flex-grow container mx-auto px-4 py-8 space-y-12">
         <Section title="Symbolic Collapse Model (SCM) Interactive Explorer" initiallyOpen={true}>
           <p className="text-lg text-gray-300 mb-6">
-            Explore the Symbolic Collapse Model by adjusting variables and observing the impact on system stability. 
+            Explore the Symbolic Collapse Model by adjusting variables and observing the impact on system stability.
             The SCM provides a framework for understanding how information load, abstraction, polarization, transmission fidelity, and epistemic coherence interact to influence symbolic systems.
           </p>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-2xl backdrop-blur-md border border-gray-700">
-              <SCMSimulator 
-                params={scmParams} 
+              <SCMSimulator
+                params={scmParams}
                 previousParams={previousScmParamsRef.current}
-                dispatchParams={dispatchScmParams} 
+                dispatchParams={dispatchScmParams}
                 calculatedValues={calculatedValues}
                 previousCalculatedValues={previousCalculatedValuesRef.current}
                 scmParamsHistory={scmParamsHistory}
@@ -129,7 +136,7 @@ const App: React.FC = () => {
         <Section title="Gemini AI Playground & SCM Contextual Analysis" initiallyOpen={false}>
           <GeminiInteraction scmParams={scmParams} geminiModel={SCM_MODEL_TEXT} />
         </Section>
-        
+
         <Section title="Applications & Future Work" initiallyOpen={false}>
             <div className="space-y-4 text-gray-300">
                 <h3 className="text-xl font-semibold text-purple-400">Applications</h3>
