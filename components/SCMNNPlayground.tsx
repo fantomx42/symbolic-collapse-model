@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { SCMParameters, SCMCalculatedValues, CollapseZone, TrendDirection, SCMParameterHistory } from '../types';
 import { DEFAULT_SCM_PARAMETERS, VARIABLE_DETAILS, COLLAPSE_ZONE_THRESHOLDS } from '../constants';
@@ -6,13 +7,12 @@ import { extractSCMFromText } from '../utils/extractSCMFromText';
 import { CollapseMeter } from './CollapseMeter';
 import { TrendArrow } from './TrendArrow';
 import { Sparkline } from './Sparkline';
-import { SCMAnalysisInsights } from './SCMAnalysisInsights'; // Import the new component
 
 interface SCMNNPlaygroundProps {
   computeSCM: (params: SCMParameters) => SCMCalculatedValues;
 }
 
-const MAX_HISTORY_POINTS_NN = 15; 
+const MAX_HISTORY_POINTS_NN = 15;
 
 const getTrend = (current?: number, previous?: number | null, epsilon = 0.001): TrendDirection => {
   if (current === undefined || previous === undefined || previous === null) return TrendDirection.NONE;
@@ -25,35 +25,37 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
   const [inputText, setInputText] = useState<string>('');
   const [rawPrediction, setRawPrediction] = useState<string | null>(null);
   const [finalOutput, setFinalOutput] = useState<string | null>(null);
-  
+
   const [currentScmParams, setCurrentScmParams] = useState<SCMParameters | null>(null);
   const [editableScmParams, setEditableScmParams] = useState<SCMParameters | null>(null);
   const [currentScmResult, setCurrentScmResult] = useState<SCMCalculatedValues | null>(null);
 
   const prevScmParamsRef = useRef<SCMParameters | null>(null);
   const prevScmResultRef = useRef<SCMCalculatedValues | null>(null);
-  
+
   const [scmParamsHistory, setScmParamsHistory] = useState<SCMParameterHistory>(() => {
     const initialHistory: SCMParameterHistory = {} as SCMParameterHistory;
     (Object.keys(DEFAULT_SCM_PARAMETERS) as Array<keyof SCMParameters>).forEach(key => {
-        initialHistory[key] = []; 
+        if (key !== 'baseline') {
+            initialHistory[key] = [];
+        }
     });
     return initialHistory;
   });
 
   const processAndSetResults = (paramsToProcess: SCMParameters, basePrediction: string | null) => {
-    prevScmParamsRef.current = currentScmParams; // Capture current before they become previous
-    setCurrentScmParams(paramsToProcess); // This is the new "current" after processing or re-evaluation
-    setEditableScmParams(JSON.parse(JSON.stringify(paramsToProcess))); // Deep copy for editing
+    prevScmParamsRef.current = currentScmParams;
+    setCurrentScmParams(paramsToProcess);
+    setEditableScmParams(JSON.parse(JSON.stringify(paramsToProcess)));
 
     const result = computeSCM(paramsToProcess);
-    prevScmResultRef.current = currentScmResult; // Capture current before update
+    prevScmResultRef.current = currentScmResult;
     setCurrentScmResult(result);
 
-    if (result.zone === CollapseZone.Critical) { 
-      setFinalOutput(`⚠️ Output suppressed due to high symbolic collapse risk (Effective Zone: ${COLLAPSE_ZONE_THRESHOLDS[result.zone].label}).`);
+    if (result.zone === CollapseZone.Critical) {
+      setFinalOutput(`⚠️ Output suppressed due to high symbolic collapse risk (Zone: ${COLLAPSE_ZONE_THRESHOLDS[result.zone].label}).`);
     } else {
-      setFinalOutput(basePrediction); // Use the original prediction
+      setFinalOutput(basePrediction);
     }
   };
 
@@ -63,11 +65,11 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
 
     const derivedParams = extractSCMFromText(inputText, prediction);
     processAndSetResults(derivedParams, prediction);
-  }, [inputText, computeSCM]); // Removed currentScmParams, currentScmResult as they are set inside
+  }, [inputText, computeSCM]);
 
   const handleReEvaluate = useCallback(() => {
     if (editableScmParams) {
-      processAndSetResults(editableScmParams, rawPrediction); // Re-process with editable params, keep original raw prediction
+      processAndSetResults(editableScmParams, rawPrediction);
     }
   }, [editableScmParams, rawPrediction, computeSCM]);
 
@@ -76,16 +78,10 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
     if (editableScmParams) {
       const numValue = parseFloat(value);
       if (!isNaN(numValue)) {
-        // Apply min/max constraints from VARIABLE_DETAILS if they exist
         const detail = VARIABLE_DETAILS[key];
         let constrainedValue = numValue;
         if (detail.min !== undefined) constrainedValue = Math.max(detail.min, constrainedValue);
         if (detail.max !== undefined) constrainedValue = Math.min(detail.max, constrainedValue);
-        
-        // Special handling for T and E to be >= 0.1
-        if ((key === 'T' || key === 'E') && constrainedValue < 0.1) {
-            constrainedValue = 0.1;
-        }
 
         setEditableScmParams({
           ...editableScmParams,
@@ -94,22 +90,22 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
       }
     }
   };
-  
+
   useEffect(() => {
-    // This effect updates history based on `currentScmParams` which changes
-    // after initial processing or re-evaluation.
     if (currentScmParams) {
       setScmParamsHistory(prevHistory => {
           const newHistory = { ...prevHistory } as SCMParameterHistory;
           (Object.keys(currentScmParams) as Array<keyof SCMParameters>).forEach(key => {
-              const currentValue = currentScmParams[key];
-              const historyForKey = prevHistory[key] ? [...prevHistory[key]] : [];
-              
-              historyForKey.push(currentValue);
-              if (historyForKey.length > MAX_HISTORY_POINTS_NN) {
-                  historyForKey.shift(); 
+              if (key !== 'baseline') {
+                  const currentValue = currentScmParams[key] as number;
+                  const historyForKey = prevHistory[key] ? [...prevHistory[key]] : [];
+
+                  historyForKey.push(currentValue);
+                  if (historyForKey.length > MAX_HISTORY_POINTS_NN) {
+                      historyForKey.shift();
+                  }
+                  newHistory[key] = historyForKey;
               }
-              newHistory[key] = historyForKey;
           });
           return newHistory;
       });
@@ -118,11 +114,11 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
 
 
   const renderParamDisplayOrInput = (key: keyof SCMParameters) => {
-    if (!editableScmParams) return null;
+    if (!editableScmParams || key === 'baseline') return null;
     const detail = VARIABLE_DETAILS[key];
-    const value = editableScmParams[key];
-    const prevValueForTrend = prevScmParamsRef.current?.[key]; // Trend based on actual previous `currentScmParams`
-    const currentDisplayValue = currentScmParams?.[key]; // Value that was last "committed"
+    const value = editableScmParams[key] as number;
+    const prevValueForTrend = prevScmParamsRef.current?.[key] as number | undefined;
+    const currentDisplayValue = currentScmParams?.[key] as number | undefined;
 
     return (
       <div key={key} className="p-2 bg-gray-700 rounded-md flex flex-col justify-between">
@@ -133,10 +129,10 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
             </label>
             <div className="flex items-center">
                 <TrendArrow direction={getTrend(currentDisplayValue, prevValueForTrend)} />
-                <Sparkline 
-                  data={scmParamsHistory[key] || []} 
-                  width={40} 
-                  height={14} 
+                <Sparkline
+                  data={scmParamsHistory[key] || []}
+                  width={40}
+                  height={14}
                   color="#a5b4fc"
                   minDomain={detail.min}
                   maxDomain={detail.max}
@@ -147,7 +143,7 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
         <input
             type="number"
             id={`edit-${key}`}
-            value={value.toFixed(detail.step === 0.1 ? 1 : 0)} // Ensure correct decimal places
+            value={value.toFixed(detail.step === 0.1 ? 1 : 0)}
             min={detail.min}
             max={detail.max}
             step={detail.step}
@@ -158,7 +154,7 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
       </div>
     );
   };
-  
+
   const renderCalculatedValue = (label: string, currentValue?: number, previousValue?: number | null) => (
     <div className="bg-gray-700 p-2 rounded-md">
       <span className="block text-xs text-gray-400">{label}</span>
@@ -168,7 +164,6 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
       </div>
     </div>
   );
-
 
   return (
     <div className="space-y-6 p-2 bg-gray-800 bg-opacity-40 rounded-lg border border-gray-700">
@@ -203,7 +198,6 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
         )}
       </div>
 
-
       {rawPrediction && (
         <div className="mt-4 p-3 bg-gray-700 bg-opacity-50 rounded-md">
           <h4 className="text-md font-semibold text-purple-300 mb-1">Mock NN Raw Prediction:</h4>
@@ -223,16 +217,14 @@ export const SCMNNPlayground: React.FC<SCMNNPlaygroundProps> = ({ computeSCM }) 
           </div>
            <div>
             <h4 className="text-md font-semibold text-purple-300 mb-2">SCM Calculated Values (based on above parameters):</h4>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                {renderCalculatedValue("Raw (cRaw)", currentScmResult.cRaw, prevScmResultRef.current?.cRaw)}
-                {renderCalculatedValue("Time C(t)", currentScmResult.C_t, prevScmResultRef.current?.C_t)}
-                {renderCalculatedValue("Resilience (R)", currentScmResult.R, prevScmResultRef.current?.R)}
-                {renderCalculatedValue("Effective (cEff)", currentScmResult.cEffective, prevScmResultRef.current?.cEffective)}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-sm">
+                {renderCalculatedValue("Stability (Σ)", currentScmResult.stability_score, prevScmResultRef.current?.stability_score)}
+                {renderCalculatedValue("Collapse Pressure (CP)", currentScmResult.collapse_pressure, prevScmResultRef.current?.collapse_pressure)}
+                {renderCalculatedValue("Confidence (C)", currentScmResult.confidence, prevScmResultRef.current?.confidence)}
             </div>
           </div>
 
           <CollapseMeter calculatedValues={currentScmResult} />
-          <SCMAnalysisInsights scmParams={editableScmParams} scmResult={currentScmResult} />
         </div>
       )}
 

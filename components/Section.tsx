@@ -7,6 +7,15 @@ interface SectionProps {
   initiallyOpen?: boolean;
 }
 
+/**
+ * A React component that displays a collapsible section.
+ *
+ * This component displays a title and a collapsible content area. The content
+ * area can be toggled by clicking on the title.
+ *
+ * @param {SectionProps} props - The props for the component.
+ * @returns {JSX.Element} The rendered component.
+ */
 export const Section: React.FC<SectionProps> = ({ title, children, initiallyOpen = false }) => {
   const [isOpen, setIsOpen] = useState(initiallyOpen);
 

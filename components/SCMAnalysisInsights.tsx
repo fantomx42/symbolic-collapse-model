@@ -30,6 +30,13 @@ const PARAM_RISK_THRESHOLDS: Record<keyof SCMParameters, { highRiskIfAbove?: num
   R_anchoring: { lowRiskIfBelow: 3, ideal: 7 },
 };
 
+/**
+ * Returns mitigation advice for a given SCM parameter.
+ * @param key - The SCM parameter.
+ * @param value - The value of the SCM parameter.
+ * @param isRisk - Whether the parameter is currently in a risky range.
+ * @returns Mitigation advice for the parameter.
+ */
 const getMitigationAdvice = (key: keyof SCMParameters, value: number, isRisk: boolean): string => {
   if (!isRisk) return "Parameter is currently in a good range.";
 
@@ -48,7 +55,15 @@ const getMitigationAdvice = (key: keyof SCMParameters, value: number, isRisk: bo
   }
 };
 
-
+/**
+ * A React component that displays analysis and insights for the SCM.
+ *
+ * This component displays the key influencing factors for the SCM, and it
+ * provides mitigation advice for any parameters that are in a risky range.
+ *
+ * @param {SCMAnalysisInsightsProps} props - The props for the component.
+ * @returns {JSX.Element} The rendered component.
+ */
 export const SCMAnalysisInsights: React.FC<SCMAnalysisInsightsProps> = ({ scmParams, scmResult }) => {
   if (!scmParams || !scmResult) {
     return (

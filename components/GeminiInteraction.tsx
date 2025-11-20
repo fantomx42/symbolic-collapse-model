@@ -1,6 +1,6 @@
 
 import React, { useState, useCallback } from 'react';
-import { GoogleGenAI, GenerateContentResponse } from '@google/genai'; // Correct import for GoogleGenAI
+import { GoogleGenAI, GenerateContentResponse } from '@google/genai';
 import { SCMParameters } from '../types';
 
 interface GeminiInteractionProps {
@@ -32,24 +32,23 @@ export const GeminiInteraction: React.FC<GeminiInteractionProps> = ({ scmParams,
     setResponse('');
 
     try {
-      const ai = new GoogleGenAI({apiKey}); // Use object for apiKey
+      const ai = new GoogleGenAI({apiKey});
 
-      const systemInstruction = `You are an AI assistant. Respond to the user's prompt. 
-Be mindful of the current Symbolic Collapse Model (SCM) context:
-- Information Load (I): ${scmParams.I.toFixed(1)} (potential for overload if high)
-- Symbolic Abstraction (S): ${scmParams.S.toFixed(1)} (high means more abstract, potentially vague)
-- Polarization (P): ${scmParams.P.toFixed(1)} (potential for divisive interpretation if high)
-- Transmission Fidelity (T): ${scmParams.T.toFixed(1)} (aim for clarity as if fidelity is this level)
-- Epistemic Coherence (E): ${scmParams.E.toFixed(1)} (aim for internal consistency as if coherence is this level)
+      const systemInstruction = `You are an AI assistant. Respond to the user's prompt.
+Be mindful of the current Symbolic Collapse Model (SCM) v3.1 context:
+- Timelessness (T): ${scmParams.T.toFixed(2)} (how well the symbol withstands time)
+- Emotional Energy (E): ${scmParams.E.toFixed(2)} (the emotional charge of the symbol)
+- Structural Coherence (S): ${scmParams.S.toFixed(2)} (how well-formed and internally consistent the symbol is)
+- Interpretive Flexibility (I): ${scmParams.I.toFixed(2)} (how easily the symbol can be interpreted in different ways)
+- Parasitic Load (P): ${scmParams.P.toFixed(2)} (the degree to which the symbol is weighed down by negative connotations)
 Generate a response that would ideally score well on these SCM metrics, balancing clarity and informativeness.
-If SCM parameters suggest high risk (e.g. low T, low E, high I/S/P), be particularly careful to produce a clear, grounded, and coherent response.`;
+If SCM parameters suggest high risk (e.g. low T, low E, low S, high P), be particularly careful to produce a clear, grounded, and coherent response.`;
 
       const result: GenerateContentResponse = await ai.models.generateContent({
         model: geminiModel,
         contents: prompt,
         config: {
           systemInstruction: systemInstruction,
-          // No thinkingConfig to default to higher quality
         },
       });
       
@@ -75,7 +74,7 @@ If SCM parameters suggest high risk (e.g. low T, low E, high I/S/P), be particul
           className="w-full p-3 bg-gray-700 text-gray-100 border border-gray-600 rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
-          placeholder="e.g., Explain the SCM concept in simple terms."
+          placeholder="e.g., Explain the SCM v3.1 concept in simple terms."
         />
       </div>
       <button
@@ -87,15 +86,7 @@ If SCM parameters suggest high risk (e.g. low T, low E, high I/S/P), be particul
             : 'bg-indigo-600 hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 shadow-lg hover:shadow-indigo-500/50'
           }`}
       >
-        {isLoading ? (
-          <div className="flex items-center justify-center">
-            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Processing...
-          </div>
-        ) : 'Generate Response'}
+        {isLoading ? 'Processing...' : 'Generate Response'}
       </button>
 
       {!apiKey && (
@@ -123,18 +114,16 @@ If SCM parameters suggest high risk (e.g. low T, low E, high I/S/P), be particul
         <h4 className="text-md font-semibold text-purple-300 mb-2">SCM Contextual Note:</h4>
         <p className="text-sm text-gray-400">
           The AI was instructed to consider the following SCM parameters you've set:
-          I: <span className="font-bold text-indigo-300">{scmParams.I.toFixed(1)}</span>, 
-          S: <span className="font-bold text-indigo-300">{scmParams.S.toFixed(1)}</span>, 
-          P: <span className="font-bold text-indigo-300">{scmParams.P.toFixed(1)}</span>, 
-          T: <span className="font-bold text-indigo-300">{scmParams.T.toFixed(1)}</span>, 
-          E: <span className="font-bold text-indigo-300">{scmParams.E.toFixed(1)}</span>.
+          T: <span className="font-bold text-indigo-300">{scmParams.T.toFixed(2)}</span>,
+          E: <span className="font-bold text-indigo-300">{scmParams.E.toFixed(2)}</span>,
+          S: <span className="font-bold text-indigo-300">{scmParams.S.toFixed(2)}</span>,
+          I: <span className="font-bold text-indigo-300">{scmParams.I.toFixed(2)}</span>,
+          P: <span className="font-bold text-indigo-300">{scmParams.P.toFixed(2)}</span>.
         </p>
         <p className="text-xs text-gray-500 mt-1">
           This helps simulate how an AI might adapt its communication style based on perceived symbolic environment conditions.
-          If the AI's response seems off, try adjusting the SCM parameters and re-prompting to see how it changes.
         </p>
       </div>
     </div>
   );
 };
-    

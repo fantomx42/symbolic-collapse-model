@@ -3,6 +3,7 @@ import torch
 from scm_engine.scm_engine import SCMEngine
 
 class TestSCMEngine(unittest.TestCase):
+    """Unit tests for the SCMEngine class."""
 
     def setUp(self):
         """Set up a new SCMEngine instance before each test."""
@@ -18,13 +19,21 @@ class TestSCMEngine(unittest.TestCase):
         self.assertEqual(self.engine.recall_pool, [])
 
     def test_score_token(self):
-        """Test the mock score_token method."""
+        """Test the mock score_token method.
+
+        Ensures that the method returns a tensor of the correct shape and
+        that the values are within the expected range.
+        """
         scores = self.engine.score_token("test", [])
         self.assertEqual(scores.shape, (5,))
         self.assertTrue(all(0 <= s <= 1 for s in scores))
 
     def test_update_gist(self):
-        """Test that the gist layer is updated correctly."""
+        """Test that the gist layer is updated correctly.
+
+        Ensures that the gist layer is updated using the correct exponential
+        moving average formula.
+        """
         initial_gist = self.engine.gist_layer.clone()
         symbolic_state = torch.tensor([0.1, 0.2, 0.3, 0.4, 0.5])
         self.engine.update_gist(symbolic_state)
@@ -33,7 +42,11 @@ class TestSCMEngine(unittest.TestCase):
         self.assertTrue(torch.allclose(self.engine.gist_layer, expected_gist))
 
     def test_add_memory_node(self):
-        """Test that memory nodes are added to the recall pool."""
+        """Test that memory nodes are added to the recall pool.
+
+        Ensures that memory nodes are correctly added to the recall pool and
+        that the data in the nodes is correct.
+        """
         self.assertEqual(len(self.engine.recall_pool), 0)
         symbolic_state = torch.tensor([0.5, 0.5, 0.5, 0.5, 0.5])
         self.engine.add_memory_node("test_event", "test_snippet", symbolic_state)
@@ -45,20 +58,31 @@ class TestSCMEngine(unittest.TestCase):
         self.assertTrue(torch.equal(node['symbolic_state'], symbolic_state))
 
     def test_decay_context(self):
-        """Test that the active memory decays correctly."""
+        """Test that the active memory decays correctly.
+
+        Ensures that the active memory is correctly multiplied by the decay
+        rate.
+        """
         self.engine.active_memory = torch.ones(10, 5)
         self.engine.decay_context()
         expected_memory = torch.full((10, 5), 0.9)
         self.assertTrue(torch.allclose(self.engine.active_memory, expected_memory))
 
     def test_filter_tokens(self):
-        """Test the mock filter_tokens method."""
+        """Test the mock filter_tokens method.
+
+        Ensures that the method returns the original list of candidate tokens.
+        """
         candidate_tokens = ["a", "b", "c"]
         filtered = self.engine.filter_tokens(candidate_tokens)
         self.assertEqual(filtered, candidate_tokens)
 
     def test_get_state(self):
-        """Test that get_state returns the correct current state."""
+        """Test that get_state returns the correct current state.
+
+        Ensures that the get_state method returns a dictionary containing the
+        correct active memory, gist layer, and recall pool.
+        """
         state = self.engine.get_state()
         self.assertTrue(torch.equal(state['active_memory'], self.engine.active_memory))
         self.assertTrue(torch.equal(state['gist_layer'], self.engine.gist_layer))
