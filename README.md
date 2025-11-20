@@ -92,3 +92,18 @@ To run the interactive explorer locally, follow these steps:
     ```
 4.  **Open the application in your browser:**
     The application will be available at http://localhost:3000.
+
+## Licensing and Citation
+
+SCM is available under **CC BY-NC-SA 4.0**. Commercial use requires prior consent.
+
+```bibtex
+@misc{wheeler2025scm,
+  author = {Wheeler, Tristan A.},
+  title  = {Symbolic Collapse Model: A Quantitative Framework for Semiotic Risk},
+  year   = {2025},
+  url    = {https://github.com/fantomx42/symbolic-collapse-model}
+}
+```
+
+Inspired by Claude Shannon, Neil Postman, and Norbert Wiener.
